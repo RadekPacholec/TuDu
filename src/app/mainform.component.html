@@ -1,0 +1,21 @@
+<form id="main-form">
+    <input type="text" name="current-task-text" id="current-task-text" placeholder="Treść zadania..." required />
+    <input type="date" name="current-task-date" id="current-task-date" required />
+    <button name="current-task-button" id="current-task-button" (click) = "onInsert()">Dodaj zadanie</button>
+</form>
+
+<table>
+    <tr *ngFor = 'let task of tasks; let i = index'>
+        <td>
+            <img *ngIf = '!task.IsDone' title="Zadanie w toku..." class="small-icon" src="images/hourglass.png" />
+            <img *ngIf = 'task.IsDone' title="Zadanie zostało zakończone" class="small-icon" src="images/done.png" />
+        </td>
+        <td style="width: 600px;">{{task.Title}}</td>
+        <td>{{task.Deadline | date: 'yyyy-MM-dd'}}</td>
+        <td style="text-align: right;">
+            <button *ngIf = '!task.IsDone' (click) = "onFinish(i)" style="text-align: right; width: 100px; font-size: 11pt; background: #cfcfcf url(images/finish.png) no-repeat 0% 50%">Zakończ</button>
+            &nbsp;&nbsp;&nbsp;
+            <button (click) = "onDelete(i)" style="text-align: right; width: 80px; font-size: 11pt; background: #cfcfcf url(images/delete.png) no-repeat 0% 50%">Usuń</button>
+        </td>
+    </tr>
+</table>
